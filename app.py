@@ -1,4 +1,5 @@
 from pathlib import Path
+from io import BytesIO
 import pandas as pd
 import plotly.express as px
 import streamlit as st
@@ -10,7 +11,7 @@ FILENAME = 'hhs_breaches.xlsx'  # Change this only if your workbook has a differ
 
 @st.cache_data
 def load_excel(content):
-    return pd.read_excel(content)
+    return pd.read_excel(BytesIO(content), engine="openpyxl")
 
 uploaded = st.sidebar.file_uploader('Optional: upload an Excel workbook', type='xlsx')
 if uploaded:
